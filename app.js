@@ -65,7 +65,7 @@ app.get('/api/:string(*)', (req,res)=>{
 
 app.get('/:short', (req,res)=>{
 
-    urlCollection.findOne({"short" : Number(req.params.short) }, (err,data)=>{
+    urlCollection.findOne({short : req.params.short }, (err,data)=>{
         if(err) console.log(err)
         console.log(data)
         
