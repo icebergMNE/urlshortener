@@ -39,7 +39,11 @@ app.get('/api/:string(*)', (req,res)=>{
                 if(err){
                     res.send(err.message)
                 }
+
                 else{
+                    console.log('data is')
+                    console.log(data.ops)
+                    
                     res.send({
                         url:data.ops[0].url,
                         short: req.hostname +  '/' + data.ops[0].short
