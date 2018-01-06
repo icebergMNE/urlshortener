@@ -43,7 +43,7 @@ app.get('/api/:string(*)', (req,res)=>{
                 else{
                     console.log('data is')
                     console.log(data.ops)
-                    
+
                     res.send({
                         url:data.ops[0].url,
                         short: req.hostname +  '/' + data.ops[0].short
@@ -69,12 +69,18 @@ app.get('/api/:string(*)', (req,res)=>{
 
 app.get('/:short', (req,res)=>{
 
+    console.log('druga ruta')
+
     urlCollection.findOne({short : req.params.short }, (err,data)=>{
-        if(err) console.log(err)
-        console.log(data)
+        if(err) {
+            console.log('ovo je error' + err)
+            console.log(data)        
+        }
+        else{
+            res.redirect(data.url)            
+        }
         
         // res.send(data.url)
-        res.redirect(data.url)
     })
     // res.send(req.params.short)
 })
