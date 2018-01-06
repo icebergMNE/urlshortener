@@ -22,6 +22,28 @@ mongo.connect(url, function(err, client) {
     // })
 })
 
+
+app.get('/:short', (req,res)=>{
+
+    console.log('druga ruta')
+
+    urlCollection.findOne({short : req.params.short.toString() }, (err,data)=>{
+        if(err) {
+            res.send(err.message)
+            console.log('ovo je error' + err)
+            console.log(data)        
+        }
+        else{
+            console.log(data)
+            res.redirect(data.url)            
+        }
+        
+        // res.send(data.url)
+    })
+    // res.send(req.params.short)
+})
+
+
 app.get('/api/:string(*)', (req,res)=>{
 
     console.log(req.params.string)
@@ -67,23 +89,7 @@ app.get('/api/:string(*)', (req,res)=>{
 })
 
 
-app.get('/:short', (req,res)=>{
 
-    console.log('druga ruta')
-
-    urlCollection.findOne({short : req.params.short }, (err,data)=>{
-        if(err) {
-            console.log('ovo je error' + err)
-            console.log(data)        
-        }
-        else{
-            res.redirect(data.url)            
-        }
-        
-        // res.send(data.url)
-    })
-    // res.send(req.params.short)
-})
 
 
 
