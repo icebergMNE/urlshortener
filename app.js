@@ -23,7 +23,7 @@ mongo.connect(url, function(err, client) {
 })
 
 
-app.get('/:short', (req,res)=>{
+app.get('/:short?', (req,res)=>{
 
     // console.log('druga ruta')
 
