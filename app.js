@@ -25,67 +25,72 @@ mongo.connect(url, function(err, client) {
 
 app.get('/:short', (req,res)=>{
 
-    console.log('druga ruta')
+    // console.log('druga ruta')
 
-    urlCollection.findOne({short : req.params.short.toString() }, (err,data)=>{
-        if(err) {
-            res.send(err.message)
-            console.log('ovo je error' + err)
-            console.log(data)        
-        }
-        else{
-            console.log(data)
-            res.redirect(data.url)            
-        }
+    // urlCollection.findOne({short : req.params.short.toString() }, (err,data)=>{
+    //     if(err) {
+    //         res.send(err.message)
+    //         console.log('ovo je error' + err)
+    //         console.log(data)        
+    //     }
+    //     else{
+    //         console.log(data)
+    //         res.redirect(data.url)            
+    //     }
         
-        // res.send(data.url)
-    })
-    // res.send(req.params.short)
+    //     // res.send(data.url)
+    // })
+    // // res.send(req.params.short)
+    console.log('redirect  ruta')
+    res.send(req.path)
 })
 
 
 app.get('/api/:string(*)', (req,res)=>{
 
-    console.log(req.params.string)
+    // console.log(req.params.string)
 
-    if(urlTest(req.params.string)){
+    // if(urlTest(req.params.string)){
 
-        urlCollection.count((err,data)=>{
+    //     urlCollection.count((err,data)=>{
 
-            if(err) throw err
+    //         if(err) throw err
 
-            urlCollection.insertOne({
-                'url':req.params.string,
-                'short':(data + 1).toString(16)
-            }, (err,data)=>{
-                if(err){
-                    res.send(err.message)
-                }
+    //         urlCollection.insertOne({
+    //             'url':req.params.string,
+    //             'short':(data + 1).toString(16)
+    //         }, (err,data)=>{
+    //             if(err){
+    //                 res.send(err.message)
+    //             }
 
-                else{
-                    console.log('data is')
-                    console.log(data.ops)
+    //             else{
+    //                 console.log('data is')
+    //                 console.log(data.ops)
 
-                    res.send({
-                        url:data.ops[0].url,
-                        short: req.hostname +  '/' + data.ops[0].short
-                    })
-                }
+    //                 res.send({
+    //                     url:data.ops[0].url,
+    //                     short: req.hostname +  '/' + data.ops[0].short
+    //                 })
+    //             }
                 
-            })
-            // res.send({
-            //     url:req.params.string,
-            //     count:data,
-            //     short: req.host
-            // })
-        })
+    //         })
+    //         // res.send({
+    //         //     url:req.params.string,
+    //         //     count:data,
+    //         //     short: req.host
+    //         // })
+    //     })
         
-    }
-    else{
-        res.send({
-            error: 'please user valid url with http/https'
-        })
-    }
+    // }
+    // else{
+    //     res.send({
+    //         error: 'please user valid url with http/https'
+    //     })
+    // }
+
+    console.log('api ruta')
+    res.send(req.path)
 })
 
 
