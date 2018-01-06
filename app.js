@@ -42,7 +42,7 @@ app.get('/:short?', (req,res)=>{
     // })
     // // res.send(req.params.short)
     console.log('redirect  ruta')
-    res.send(req.path)
+    res.end(req.path)
 })
 
 
@@ -90,7 +90,7 @@ app.get('/api/:string(*)', (req,res)=>{
     // }
 
     console.log('api ruta')
-    res.send(req.path)
+    res.end(req.path)
 })
 
 
