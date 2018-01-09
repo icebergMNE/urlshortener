@@ -22,6 +22,10 @@ mongo.connect(url, function(err, client) {
     // })
 })
 
+app.get('/', (req, res)=> {
+    res.send('url shortener service working')
+})
+
 app.get('/api/:string(*)', (req,res)=>{
 
     console.log(req.params.string)
@@ -59,12 +63,9 @@ app.get('/api/:string(*)', (req,res)=>{
             error: 'please user valid url with http/https'
         })
     }
-
-    // console.log('api ruta')
-    // res.end(req.path)
 })
 
-app.get('/:moze?', (req,res)=>{
+app.get('/:short?', (req,res)=>{
 
     console.log('druga ruta')
 
@@ -76,14 +77,17 @@ app.get('/:moze?', (req,res)=>{
         }
         else{
             console.log(data)
-            res.redirect(data.url)            
+            if(data){
+                res.redirect(data.url)   
+            }
+            else{
+                res.send({
+                    error: 'url not found in database'
+                })
+            }
+                     
         }
-        
-        // res.send(data.url)
     })
-    // res.send(req.params.short)
-    // console.log('redirect  ruta')
-    // res.end(req.path)
 })
 
 
@@ -93,8 +97,7 @@ app.get('/:moze?', (req,res)=>{
 
 
 
-
-app.listen(process.env.PORT || 8080)
+app.listen(process.env.PORT || 3005)
 
 let urlTest = url => {
 
